@@ -1,30 +1,25 @@
---Scripted by IgnaciioDX
+package.path = package.path .. ";./lib/wxLua/bindings/?.lua"
+package.cpath = package.cpath .. ";./lib/wxLua/bin/?.dll"
 
-package.cpath = package.cpath .. ";./iup/iuplua54.dll" -- Windows
+-- Modules --
 
---Variables--
+local wx = require("wx")
 
-local iup = require("iuplua")
+-- Variables --
+
 local ASPECT_RATIO = 16/9
-local RESOLUTION = iup.GetGlobal("FULLSIZE")
-local SCREENWIDTH, SCREENHEIGHT = string.match(RESOLUTION, "(%d+)x(%d+)")
-
---Instances--
 
 
-local dlg = iup.dialog {
-    title = "LoL AutoPick",
-    resize = "NO",
-    rastersize = "1600x900",
-    icon = "./bin/icon.ico"
-    
-}
-dlg:show()
+-- Instances --
 
-print("Printing Current Res:")
-print(dlg.rastersize, dlg.size)
+local frame = wx.wxFrame(
+    wx.NULL,                -- Sin padre
+    wx.wxID_ANY,            -- ID automático
+    "League of Legends AutoPick",         -- Título
+    wx.wxDefaultPosition,   -- Posición predeterminada
+    wx.wxSize(400, 300)     -- Tamaño de la ventana
+)
 
+frame:Show(true)
 
-
-
-iup.MainLoop()
+wx.wxGetApp():MainLoop()
